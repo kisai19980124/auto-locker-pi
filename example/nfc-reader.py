@@ -1,4 +1,5 @@
-# Reference from https://jellyware.jp/kurage/raspi/nfc.html
+# Reference to https://jellyware.jp/kurage/raspi/nfc.html
+# Run by Python 3.7.3
 
 import binascii
 import nfc
