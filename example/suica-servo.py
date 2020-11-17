@@ -35,7 +35,7 @@ servo = GPIO.PWM(gp_out, 50)
 #とりあえずゼロ指定だとサイクルが生まれないので特に動かないっぽい？
 servo.start(0)
 time.sleep(0.5)
-servo.ChangeDutyCycle(9.75)
+servo.ChangeDutyCycle(7.50)
 time.sleep(0.5)
 
 print 'Suica waiting...'
@@ -60,9 +60,9 @@ while True:
 
         if idm in id_list:
             print 'Suica ID is authenticated'
-            servo.ChangeDutyCycle(5.25)
+            servo.ChangeDutyCycle(3.00)
             time.sleep(0.5)
-            servo.ChangeDutyCycle(9.75)
+            servo.ChangeDutyCycle(7.50)
             time.sleep(0.5)
 
     #end if

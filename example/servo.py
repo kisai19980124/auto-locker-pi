@@ -21,16 +21,16 @@ servo.start(0)
 
 for i in range(3):
     #デューティサイクルの値を変更することでサーボが回って角度が変わる。
-    servo.ChangeDutyCycle(9.75)
+    servo.ChangeDutyCycle(3.00)
     time.sleep(0.5)
 
-    servo.ChangeDutyCycle(5.25)
+    servo.ChangeDutyCycle(7.50)
     time.sleep(0.5)
 
-    servo.ChangeDutyCycle(9.75)
+    servo.ChangeDutyCycle(12.00)
     time.sleep(0.5)
 
-    servo.ChangeDutyCycle(5.25)
+    servo.ChangeDutyCycle(7.50)
     time.sleep(0.5)
 
 servo.stop()
