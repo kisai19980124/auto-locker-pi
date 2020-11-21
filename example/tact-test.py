@@ -44,7 +44,7 @@ while True:
             deg = 0                        #変数"deg"に0を格納
             servo_angle(deg)                     #サーボモータを変数"deg"の角度に動作
     except KeyboardInterrupt:                #Ctrl+Cキーが押された
-        Servo.stop()                         #サーボモータをストップ
+        servo.stop()                         #サーボモータをストップ
         GPIO.cleanup()                       #GPIOをクリーンアップ
         sys.exit()                           #プログラムを終了
 
