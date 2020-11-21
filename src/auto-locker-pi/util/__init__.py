@@ -1,2 +1,2 @@
-from .servo-angle import servo-angle
+from .servoAngle import servoAngle
 from .servo import servo
