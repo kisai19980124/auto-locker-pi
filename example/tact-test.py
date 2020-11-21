@@ -4,7 +4,7 @@ import sys
 
 GPIO.setmode(GPIO.BCM)
 
-gp_in_blue = 24
+gp_in_blue = 16
 gp_in_red = 25
 GPIO.setup(gp_in_blue, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(gp_in_red, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
