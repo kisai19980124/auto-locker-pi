@@ -1,13 +1,10 @@
-# Reference to https://jellyware.jp/kurage/raspi/nfc.html
-# Run by Python 3.7.3
-
 import binascii
 import nfc
-import os
-id_list = os.environ["NFC_ID"].split(":")
-# export NFC_ID="00000000000000:11111111111111:22222222222222"
 
-class MyCardReader(object):
+class reader(object):
+    def __init__(self, id_list):
+        self.id_list = id_list
+
     def on_connect(self, tag):
         #タッチ時の処理 
         print("【 Touched 】")
@@ -20,7 +17,7 @@ class MyCardReader(object):
         print("IDm : " + self.idm)
  
         #特定のIDmだった場合のアクション 
-        if self.idm in id_list:
+        if self.idm in self.id_list:
             print("【 登録されたIDです 】")
  
         return True
@@ -34,18 +31,3 @@ class MyCardReader(object):
 
     def close(self):
         self.clf.close()
- 
-if __name__ == '__main__':
-    cr = MyCardReader()
-    try:
-        while True:
-            #最初に表示 
-            print("Please Touch")
-    
-            #タッチ待ち 
-            cr.read_id()
-    
-            #リリース時の処理 
-            print("【 Released 】")
-    except KeyboardInterrupt:
-        pass
