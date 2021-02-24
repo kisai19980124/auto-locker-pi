@@ -36,7 +36,7 @@ class Locker(object):
 
         #補助ピンAのセットアップ
         GPIO.setup(self.gp_in_green, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-        GPIO.add_event_detect(self.gp_in_green, GPIO.RISING, callback=self.callback_costco, bouncetime=1000)
+        GPIO.add_event_detect(self.gp_in_green, GPIO.RISING, callback=self.callback_wait_lock, bouncetime=1000)
 
         #補助ピンBのセットアップ
         GPIO.setup(self.gp_in_blue, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
@@ -50,38 +50,38 @@ class Locker(object):
         cr = reader(self.id_list)
         while True:
             try:
-                #最初に表示 
-                print("Please Touch")
-        
-                #タッチ待ち 
                 cr.read_id()
-        
-                #リリース時の処理 
-                print("【 Released 】")
                 if self.if_open:
                     self.callback_close(0)
                 else:
                     self.callback_open(0)
 
-            except KeyboardInterrupt: #Ctrl+Cキーが押された
-                GPIO.cleanup()        #GPIOをクリーンアップ
+            except KeyboardInterrupt: #Ctrl+Cキーが押して,
+                GPIO.cleanup()        #GPIOをクリーンアップし，
                 sys.exit()            #プログラムを終了
 
     def callback_open(self, channel):
         servo(self.gp_out, GPIO, 90) #サーボモータを90度に動作
         servo(self.gp_out, GPIO, 0)  #サーボモータを0度に動作
         self.if_open = True
+        self.bot.send(message = "解錠しました")
 
     def callback_close(self, channel):
         servo(self.gp_out, GPIO, -90) #サーボモータを-90度に動作
         servo(self.gp_out, GPIO, 0)   #サーボモータを0度に動作
         self.if_open = False
+        self.bot.send(message = "施錠しました")
 
     def callback_costco(self, channel):
         self.bot.send(message = "Costco行かね？")
 
     def callback_donki(self, channel):
         self.bot.send(message = "ドンキ行かね？")
+
+    def callback_wait_lock(self, channel):
+        self.bot.send(message = "30秒後に施錠します")
+        time.sleep(30)
+        self.callback_close(0)
 
 if __name__ == "__main__":
     locker = Locker()
