@@ -79,8 +79,8 @@ class Locker(object):
         self.bot.send(message = "ドンキ行かね？")
 
     def callback_wait_lock(self, channel):
-        self.bot.send(message = "30秒後に施錠します")
-        time.sleep(30)
+        self.bot.send(message = "5秒後に施錠します")
+        time.sleep(5)
         self.callback_close(0)
 
 if __name__ == "__main__":
